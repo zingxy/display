@@ -43,7 +43,7 @@ function render(entitys: Array<Entity> | Array<RawData>, text: string) {
   let template = text;
   for (let entity of entitys) {
     let span = `<span class>${entity.label}</span>`;
-    let mark = `<mark class="entity ${entity.labe'[l}">${entity.name}</mark>`;
+    let mark = `<mark class="entity ${entity.label}">${entity.name}</mark>`;
     let fmt = mark + span;
     template = template.replace(new RegExp(entity.name, "gmi"), fmt);
     // template.replaceAll(entity.name, fmt)

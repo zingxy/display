@@ -25,8 +25,8 @@ function render(entitys, text) {
     var template = text;
     for (var _i = 0, entitys_1 = entitys; _i < entitys_1.length; _i++) {
         var entity = entitys_1[_i];
-        var span = "<span class>" + entity.type + "</span>";
-        var mark = "<mark class=\"entity " + entity.type + "\">" + entity.name + "</mark>";
+        var span = "<span class>" + entity.label + "</span>";
+        var mark = "<mark class=\"entity " + entity.label + "\">" + entity.name + "</mark>";
         var fmt = mark + span;
         template = template.replace(new RegExp(entity.name, "gmi"), fmt);
         // template.replaceAll(entity.name, fmt)
@@ -42,15 +42,15 @@ function render(entitys, text) {
 var entitys = [
     {
         name: "Trp175Tyr",
-        type: "snp",
+        label: "snp",
     },
     {
         name: "Kinetic",
-        type: "dna",
+        label: "dna",
     },
     {
         name: "structure",
-        type: "protein",
+        label: "protein",
     },
 ];
 render(entitys, text);
