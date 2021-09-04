@@ -1,0 +1,14 @@
+.snp {
+  /* color: green; */
+  background-color: green;
+}
+
+.dna{
+  color: red;
+  background-color: hotpink;
+}
+
+.protein{
+  color: darkolivegreen;
+  background-color: indigo;
+}
