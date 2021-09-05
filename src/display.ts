@@ -1,16 +1,16 @@
 // 后端请求接口
 interface RawData {
-  name: string;
-  label: string;
-  count?: number;
+  name: string; // egg Chongqing, NanChang.
+  label: string; // indicate which type this entity is. egg LOC, PER, ORG
+  count?: number; // how many times that identical entity occur in text.
 }
 
 //
 interface Entity {
   name: string;
   label: string;
-  start: number;
-  end: number;
+  start?: number;
+  end?: number;
 }
 
 const text =
@@ -39,13 +39,12 @@ const names = ["Trp175Tyr"];
 //   return entitys;
 // }
 
-function render(entitys: Array<Entity> | Array<RawData>, text: string) {
+function render(entitys: Array<RawData | Entity>, text: string) {
   let template = text;
   for (let entity of entitys) {
-    let span = `<span class>${entity.label}</span>`;
-    let mark = `<mark class="entity ${entity.label}">${entity.name}</mark>`;
-    let fmt = mark + span;
-    template = template.replace(new RegExp(entity.name, "gmi"), fmt);
+    let span = `<span class="label">${entity.label}</span>`;
+    let mark = `<mark class="entity ${entity.label}">${entity.name}${span}</mark>`;
+    template = template.replace(new RegExp(entity.name, "gmi"), mark);
     // template.replaceAll(entity.name, fmt)
   }
   const root = document.getElementById("result");

@@ -1,14 +1,89 @@
+body,
+html {
+  height: 100%;
+}
+
+.bg {
+  background-color: #d9eee1;
+  font-size: 15px;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 2.5em;
+}
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.button {
+  background-color: #1d976c;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+/* entity types */
+.entity {
+  font-size: 1.1em;
+  border-radius: 12px;
+}
 .snp {
-  /* color: green; */
-  background-color: green;
+  background: #ff512f; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f09819,
+    #ff512f
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f09819,
+    #ff512f
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.dna{
-  color: red;
-  background-color: hotpink;
+.dna {
+  background: #fc354c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #0abfbc,
+    #fc354c
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #0abfbc,
+    #fc354c
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.protein{
-  color: darkolivegreen;
-  background-color: indigo;
+.protein {
+  background: #1d976c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #93f9b9,
+    #1d976c
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #93f9b9,
+    #1d976c
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* label */
+.label {
+  font-size: 0.8em;
+  font-weight: bold;
+  margin: 1%;
 }

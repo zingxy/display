@@ -25,10 +25,9 @@ function render(entitys, text) {
     var template = text;
     for (var _i = 0, entitys_1 = entitys; _i < entitys_1.length; _i++) {
         var entity = entitys_1[_i];
-        var span = "<span class>" + entity.label + "</span>";
-        var mark = "<mark class=\"entity " + entity.label + "\">" + entity.name + "</mark>";
-        var fmt = mark + span;
-        template = template.replace(new RegExp(entity.name, "gmi"), fmt);
+        var span = "<span class=\"label\">" + entity.label + "</span>";
+        var mark = "<mark class=\"entity " + entity.label + "\">" + entity.name + span + "</mark>";
+        template = template.replace(new RegExp(entity.name, "gmi"), mark);
         // template.replaceAll(entity.name, fmt)
     }
     var root = document.getElementById("result");
