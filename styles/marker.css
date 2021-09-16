@@ -2,6 +2,12 @@ body,
 html {
     height: 100%;
 }
+article {
+    margin-left: 5%;
+}
+.result {
+    display: flex;
+}
 
 .bg {
     background-color: #d9eee1;
@@ -10,6 +16,7 @@ html {
     font-family: Georgia, "Times New Roman", Times, serif;
     line-height: 2.5em;
 }
+
 input[type="text"],
 select,
 textarea {

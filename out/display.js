@@ -10,31 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 function api(text) {
     return __awaiter(this, void 0, void 0, function* () {
-        const server = "http://10.16.24.230:8000/find";
-        let data = {
-            title: "",
-            abstract: "",
-            content: text,
-        };
-        let header = new Headers({
-            "Content-Type": "application/json",
-        });
-        const payload = JSON.stringify(data);
-        const resp = yield fetch(server, {
-            method: "POST",
-            body: payload,
-            headers: header,
-            mode: "cors",
-        });
-        const entities = yield resp.json();
-        console.log(entities);
-        if (resp) {
-            if (resp.body) {
-                console.log(resp.body);
-            }
-        }
-        console.log(entities);
-        return entities;
+        const entitys = [
+            {
+                name: "Trp175Tyr",
+                label: "snp",
+            },
+            {
+                name: "Kinetic",
+                label: "dna",
+            },
+            {
+                name: "structure",
+                label: "protein",
+            },
+        ];
+        return entitys;
     });
 }
 function handler(e) {
@@ -46,22 +36,28 @@ function handler(e) {
         console.log(entitys);
     });
 }
-function main() {
-    let btn = document.getElementById("submit");
-    if (btn) {
-        btn.addEventListener("click", handler);
-    }
-}
 function render(entitys, text) {
     let template = text;
+    let list = "";
     for (let entity of entitys) {
+        list += `<li>${entity.name}:${entity.label}</li>`;
         let span = `<span class="label">${entity.label}</span>`;
         let mark = `<mark class="entity ${entity.label}">${entity.name}${span}</mark>`;
         template = template.replace(new RegExp(entity.name, "gmi"), mark);
     }
-    const root = document.getElementById("result");
+    const root = document.getElementById("article");
+    const mutations = document.getElementById("mutations");
     if (root) {
         root.innerHTML = template;
+    }
+    if (mutations) {
+        mutations.innerHTML = list;
+    }
+}
+function main() {
+    let btn = document.getElementById("submit");
+    if (btn) {
+        btn.addEventListener("click", handler);
     }
 }
 main();
