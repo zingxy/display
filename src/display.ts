@@ -40,6 +40,59 @@ type Entities = Array<Entity | RawData>;
 //   }
 //   return entitys;
 // }
+
+function entity_sort(entities: Array<Entity>): Map<string, Array<string>> {
+    // 实体做一个分类 group by label()
+
+    let label2entities: Map<string, Array<string>> = new Map();
+    for (const entity of entities) {
+        if (label2entities.has(entity.label)) {
+            label2entities.get(entity.label)?.push(entity.name);
+        } else {
+            label2entities.set(entity.label, [entity.name]);
+        }
+    }
+    return label2entities;
+}
+
+function render(entitys: Entities, text: string) {
+    console.log(entity_sort(entitys));
+    let template = text; // 实体原文及标记
+
+    for (let entity of entitys) {
+        // list += `<li>${entity.name}:${entity.label}</li>`;
+        let span = `<span class="label">${entity.label}</span>`;
+        let mark = `<mark class="entity ${entity.label}">${entity.name}${span}</mark>`;
+        // (?<!<mark)(?<!>)mutation
+        template = template.replace(
+            new RegExp(`(?<!>)${entity.name}(?!<)`, "gmi"),
+            mark
+        );
+        // template.replaceAll(entity.name, fmt)
+    }
+    let list = ""; //实体列表
+    for (let item of entity_sort(entitys)) {
+        // item: [key, value]
+        let innerUList = "";
+        let listItem = "";
+        for (let entityName of item[1]) {
+            listItem = `<li>${entityName}</li>`;
+            innerUList += listItem;
+        }
+        list += `<li>${item[0]}<ul>${innerUList}</ul></li>`;
+    }
+    console.log(list);
+
+    // todo 这里可以创建元素， 而不是获取元素引用（解耦合）
+    const root = document.getElementById("article");
+    const mutationList = document.getElementById("mutations");
+    if (root) {
+        root.innerHTML = template;
+    }
+    if (mutationList) {
+        mutationList.innerHTML = list;
+    }
+}
 async function api(text: string): Promise<Entities> {
     // post client data to server, and get feedback.
     // const server = "http://10.16.24.230:8000/find";
@@ -101,32 +154,6 @@ async function handler(e: Event) {
     //   const text = target.value;
     const entitys = await api(text);
     render(entitys, text);
-    console.log(entitys);
-    // forbid default behavial.
-}
-
-function render(entitys: Entities, text: string) {
-    let template = text;  // 实体原文标记
-    let list = "";       //实体列表
-    for (let entity of entitys) {
-        list += `<li>${entity.name}:${entity.label}</li>`;
-        let span = `<span class="label">${entity.label}</span>`;
-        let mark = `<mark class="entity ${entity.label}">${entity.name}${span}</mark>`;
-        // (?<!<mark)(?<!>)mutation
-        template = template.replace(
-            new RegExp(`(?<!>)${entity.name}(?!<)`, "gmi"),
-            mark
-        );
-        // template.replaceAll(entity.name, fmt)
-    }
-    const root = document.getElementById("article");
-    const mutations = document.getElementById("mutations");
-    if (root) {
-        root.innerHTML = template;
-    }
-    if (mutations) {
-        mutations.innerHTML = list;
-    }
 }
 
 function main() {
