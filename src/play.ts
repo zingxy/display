@@ -1,5 +1,6 @@
-function show(s:string){
-    console.log(s)
+type Fish = { swim: () => void };
+type Bird = { fly: () => void };
+type Human = { swim?: () => void; fly?: () => void };
+function isFish(pet: Fish | Bird): pet is Fish {
+    return (pet as Fish).swim !== undefined;
 }
-console.log('123')
-show('2')
