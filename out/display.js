@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 function api(text) {
     return __awaiter(this, void 0, void 0, function* () {
         const entitys = [
+            { name: "struc", label: "snp" },
             {
                 name: "Trp175Tyr",
                 label: "snp",
@@ -18,6 +19,10 @@ function api(text) {
             {
                 name: "Kinetic",
                 label: "dna",
+            },
+            {
+                name: "structure",
+                label: "protein",
             },
             {
                 name: "structure",
@@ -43,7 +48,7 @@ function render(entitys, text) {
         list += `<li>${entity.name}:${entity.label}</li>`;
         let span = `<span class="label">${entity.label}</span>`;
         let mark = `<mark class="entity ${entity.label}">${entity.name}${span}</mark>`;
-        template = template.replace(new RegExp(entity.name, "gmi"), mark);
+        template = template.replace(new RegExp(`(?<!>)${entity.name}(?!<)`, "gmi"), mark);
     }
     const root = document.getElementById("article");
     const mutations = document.getElementById("mutations");

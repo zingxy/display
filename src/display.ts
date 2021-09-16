@@ -73,6 +73,7 @@ async function api(text: string): Promise<Entities> {
     // }
     // // 测试数据
     const entitys: Array<RawData | Entity> = [
+        { name: "struc", label: "snp" },
         {
             name: "Trp175Tyr",
             label: "snp",
@@ -80,6 +81,10 @@ async function api(text: string): Promise<Entities> {
         {
             name: "Kinetic",
             label: "dna",
+        },
+        {
+            name: "structure",
+            label: "protein",
         },
         {
             name: "structure",
@@ -101,13 +106,17 @@ async function handler(e: Event) {
 }
 
 function render(entitys: Entities, text: string) {
-    let template = text;
-    let list = "";
+    let template = text;  // 实体原文标记
+    let list = "";       //实体列表
     for (let entity of entitys) {
         list += `<li>${entity.name}:${entity.label}</li>`;
         let span = `<span class="label">${entity.label}</span>`;
         let mark = `<mark class="entity ${entity.label}">${entity.name}${span}</mark>`;
-        template = template.replace(new RegExp(entity.name, "gmi"), mark);
+        // (?<!<mark)(?<!>)mutation
+        template = template.replace(
+            new RegExp(`(?<!>)${entity.name}(?!<)`, "gmi"),
+            mark
+        );
         // template.replaceAll(entity.name, fmt)
     }
     const root = document.getElementById("article");
