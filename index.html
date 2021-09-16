@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Mutaion display</title>
-    <link href="./styles/marker.css" rel="stylesheet" />
-  </head>
-  <body class="bg">
-    <header></header>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Mutaion display</title>
+        <link href="./styles/marker.css" rel="stylesheet" />
+    </head>
+    <body class="bg">
+        <header></header>
 
-    <main>
-      <div class="search">
-        <form>
-          <textarea
-            id="input"
-            type="text"
-            cols="100"
-            rows="10"
-            autofocus
-          ></textarea>
-          <button class="button" id="submit">submit</button>
-        </form>
-      </div>
-
-      <article id="result" class="article"></article>
-    </main>
-    <script src="./out/display.js"></script>
-  </body>
+        <main>
+            <div class="search">
+                <form>
+                    <textarea
+                        id="input"
+                        type="text"
+                        cols="100"
+                        rows="10"
+                        autofocus
+                    ></textarea>
+                    <button class="button" id="submit">submit</button>
+                </form>
+            </div>
+            <div class="result">
+                <ul id="mutations">
+                    <!-- <li>1</li>
+                    <li>2</li>
+                    <li>3</li> -->
+                </ul>
+                <article id="article" class="article"></article>
+            </div>
+        </main>
+        <script src="./out/display.js"></script>
+    </body>
 </html>

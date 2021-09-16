@@ -42,32 +42,51 @@ type Entities = Array<Entity | RawData>;
 // }
 async function api(text: string): Promise<Entities> {
     // post client data to server, and get feedback.
-    const server = "http://10.16.24.230:8000/find";
-    let data = {
-        title: "",
-        abstract: "",
-        content: text,
-    };
-    let header = new Headers({
-        "Content-Type": "application/json",
-    });
-    const payload = JSON.stringify(data);
-    const resp = await fetch(server, {
-        method: "POST",
-        body: payload,
-        headers: header,
-        mode: "cors",
-    });
-    const entities: Entities = await resp.json();
-    console.log(entities);
-    if (resp) {
-        if (resp.body) {
-            console.log(resp.body);
-            // const entity: Array<RawData | Entity> = JSON.parse();
-        }
-    }
-    console.log(entities);
-    return entities;
+    // const server = "http://10.16.24.230:8000/find";
+    // let data = {
+    //     title: "",
+    //     abstract: "",
+    //     content: text,
+    // };
+    // let header = new Headers({
+    //     "Content-Type": "application/json",
+    // });
+    // const payload = JSON.stringify(data);
+    // let resp = null;
+    // try {
+    //     resp = await fetch(server, {
+    //         method: "POST",
+    //         body: payload,
+    //         headers: header,
+    //         mode: "cors",
+    //     });
+    // } catch (error) {
+    //     console.log(error);
+    // } finally {
+    //     if (resp) {
+    //         const entities: Entities = await resp.json();
+    //         console.log(entities);
+    //         if (resp.body) {
+    //             console.log(resp.body);
+    //         }
+    //     }
+    // }
+    // // 测试数据
+    const entitys: Array<RawData | Entity> = [
+        {
+            name: "Trp175Tyr",
+            label: "snp",
+        },
+        {
+            name: "Kinetic",
+            label: "dna",
+        },
+        {
+            name: "structure",
+            label: "protein",
+        },
+    ];
+    return entitys;
 }
 
 async function handler(e: Event) {
@@ -81,25 +100,31 @@ async function handler(e: Event) {
     // forbid default behavial.
 }
 
-function main() {
-    let btn = document.getElementById("submit");
-    if (btn) {
-        btn.addEventListener("click", handler);
-        // btn.addEventListener("click", ()=>{});
-    }
-}
-
 function render(entitys: Entities, text: string) {
     let template = text;
+    let list = "";
     for (let entity of entitys) {
+        list += `<li>${entity.name}:${entity.label}</li>`;
         let span = `<span class="label">${entity.label}</span>`;
         let mark = `<mark class="entity ${entity.label}">${entity.name}${span}</mark>`;
         template = template.replace(new RegExp(entity.name, "gmi"), mark);
         // template.replaceAll(entity.name, fmt)
     }
-    const root = document.getElementById("result");
+    const root = document.getElementById("article");
+    const mutations = document.getElementById("mutations");
     if (root) {
         root.innerHTML = template;
+    }
+    if (mutations) {
+        mutations.innerHTML = list;
+    }
+}
+
+function main() {
+    let btn = document.getElementById("submit");
+    if (btn) {
+        btn.addEventListener("click", handler);
+        // btn.addEventListener("click", ()=>{});
     }
 }
 
