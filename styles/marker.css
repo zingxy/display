@@ -1,6 +1,7 @@
-body,
-html {
+html,
+body {
     height: 100%;
+    font-size: 16px;
 }
 article {
     margin-left: 5%;
@@ -11,10 +12,8 @@ article {
 
 .bg {
     background-color: #d9eee1;
-    font-size: 15px;
     /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-    font-family: Georgia, "Times New Roman", Times, serif;
-    line-height: 2.5em;
+    line-height: 2.5rem;
 }
 
 input[type="text"],
@@ -24,7 +23,6 @@ textarea {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
     resize: vertical;
 }
 
@@ -43,7 +41,7 @@ textarea {
 
 /* entity types */
 .entity {
-    font-size: 1.1em;
+    font-size: 1.1 rem;
     border-radius: 12px;
 }
 .SNP {
@@ -90,7 +88,7 @@ textarea {
 
 /* label */
 .label {
-    font-size: 0.8em;
+    font-size: 0.8rem;
     font-weight: bold;
     margin: 1%;
 }
