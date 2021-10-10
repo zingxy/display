@@ -34,7 +34,7 @@ textarea {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    margin: 4px 2px;
+    margin: auto;
     cursor: pointer;
     border-radius: 16px;
 }
